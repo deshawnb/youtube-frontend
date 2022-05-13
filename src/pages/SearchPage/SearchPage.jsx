@@ -1,11 +1,25 @@
-import react from "react";
-import { useEffect, useState } from "react/cjs/react.production.min";
-import axios from "axios";
-import useAuth from "../../hooks/useAuth"
+
+import React, { useState } from 'react';
+
+
 
 const SearchPage = (props) => {
+    const [filter, setFilter] = useState("")
+    function handleSubmit(event){
+event.preventDefault();
+let newFilter = {
+    filter: filter
+};
+setFilter(newFilter)
+    }
+     
+ 
     return (
-        <h1>This is the search page</h1>
+        <form onSubmit={handleSubmit}>
+            <label>Filter Songs</label>
+            <input type={""} value={filter} onChange={(event) => setFilter(event.target.value)}/>
+            <button type='submit'>Search</button>
+        </form>
     );
 }
  
