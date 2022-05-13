@@ -2,7 +2,9 @@ import React from "react";
 import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
+import SearchBar from "../SearchBar/SearchBar"
 import "./NavBar.css";
+
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
@@ -15,6 +17,9 @@ const Navbar = () => {
             <b>Youtube Clone</b>
           </Link>
         </li>
+        <li>
+          <SearchBar></SearchBar>
+        </li>
 
         <li>
           {user ? (
@@ -25,7 +30,7 @@ const Navbar = () => {
           </li>
         <li>
           {user ? (
-            <button onClick={logoutUser}>Logout</button>
+            <h5>Welcome</h5>
           ) : (
             <button onClick={() => navigate("/register")}>Register</button>
           )}
