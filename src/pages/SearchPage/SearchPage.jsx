@@ -16,7 +16,7 @@ setFilter(newFilter)
  
     return (
         <form onSubmit={handleSubmit}>
-            <label>Filter Songs</label>
+            <label>Search Videos</label>
             <input type={""} value={filter} onChange={(event) => setFilter(event.target.value)}/>
             <button type='submit'>Search</button>
         </form>
