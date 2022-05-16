@@ -22,6 +22,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import SearchPage from "./components/SearchBar/SearchBar";
 
 
 
@@ -66,7 +67,7 @@ const [searchTerm, setSearchTerm] = useState("castles");
             </PrivateRoute>
           }
         />
-
+        <SearchPage setSearchTerm={setSearchTerm} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/homepage" element={<HomePage />} />
