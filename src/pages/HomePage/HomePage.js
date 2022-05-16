@@ -13,12 +13,12 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("castles");
 
   useEffect(() => {
-    fetchVideos(searchTerm);
-  }, [searchTerm]);
+    fetchVideos();
+  }, []);
 
-  const fetchVideos = async (searchTerm) => {
+  async function fetchVideos(){
     try {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}key=AIzaSyAtdlBhTmpzQ5D-aDGR9PNpfJJAL6aofWY&type=video&relatedToVideo&part=snippet&maxResults=5`);
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyAtdlBhTmpzQ5D-aDGR9PNpfJJAL6aofWY&type=video&relatedToVideo&part=snippet&maxResults=5`);
       setVideos(response.data);
       console.log(videos)
     } catch (error) {
@@ -27,17 +27,16 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      
-        {videos &&
-        videos.map((video, index) => (
-          <p key={index}>
-            {video.kind} 
-          </p>
-        ))}
-    </div>
-  );
-};
+  <div>
+  {videos.items.map((video) =>
+   {console.log(video)}
+     )}
 
+  </div>
+  );
+ 
+
+  
+  
+  }
 export default HomePage;
