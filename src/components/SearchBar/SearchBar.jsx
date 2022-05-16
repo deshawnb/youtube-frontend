@@ -10,7 +10,7 @@ event.preventDefault();
 let newFilter = {
     filter: filter
 };
-setFilter(newFilter)
+props.setSearchTerm(newFilter)
     }
      
  
