@@ -4,6 +4,7 @@ import "./App.css";
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import useAuth from "../src/hooks/useAuth";
+import { KEY } from "./localKey";
 
 
 
@@ -38,7 +39,7 @@ const [searchTerm, setSearchTerm] = useState("castles");
 
   async function fetchVideos(){
     try {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyAtdlBhTmpzQ5D-aDGR9PNpfJJAL6aofWY&type=video&relatedToVideo&part=snippet&maxResults=5`);
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
       setVideos(response.data.items);
       console.log(videos)
     } catch (error) {
