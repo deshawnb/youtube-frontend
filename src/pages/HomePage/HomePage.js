@@ -19,7 +19,7 @@ const HomePage = () => {
   async function fetchVideos(){
     try {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyAtdlBhTmpzQ5D-aDGR9PNpfJJAL6aofWY&type=video&relatedToVideo&part=snippet&maxResults=5`);
-      setVideos(response.data);
+      setVideos(response.data.items);
       console.log(videos)
     } catch (error) {
       console.log(error.message);
@@ -27,12 +27,15 @@ const HomePage = () => {
   };
 
   return (
-  <div>
-  {videos.items.map((video) =>
-   {console.log(video)}
-     )}
-
+    <div>
+  
+  {videos.map((video) =>{
+    {console.log(video)}
+    return <h1> {video.id.videoId}</h1>
+        
+      })}
   </div>
+ 
   );
  
 
