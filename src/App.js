@@ -20,25 +20,30 @@ import VideoPage from "./pages/VideoPage/VideoPage";
 import Navbar from "./components/NavBar/NavBar";
 import SearchPage from "./components/SearchBar/SearchBar";
 import Footer from "./components/Footer/Footer";
+import CommentForm from "./components/CommentForm/CommentForm";
+import CommentList from "./components/CommentList/CommentList"
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
 
-
-
-
-
-
 function App() {
 
-const [user, token] = useAuth();
-const [videos, setVideos] = useState([]);
-let searchTerm = 'skyrim'
+  const [user, token] = useAuth();
+  const [videos, setVideos] = useState([]);
+  const [comments, setComments] = useState([])
+  let searchTerm = 'skyrim'
+
 
   useEffect(() => {
     fetchVideos(searchTerm);
+    getAllComments();
   }, []);
+
+  async function getAllComments(){
+    let response = await axios.get('http://127.0.0.1:8000/api/comment/all');
+    setComments(response.data);
+  }
 
   function newSearch(filter){
     searchTerm = filter;
@@ -65,6 +70,8 @@ let searchTerm = 'skyrim'
     <div>
       <Navbar/>
       <SearchPage setSearchTerm={newSearch}/>
+      <CommentList parentComments={comments}/>
+      {/* <CommentForm addNewCommentProperty={addNewComment}/> */}
       <Routes>
         <Route
           path="/"
