@@ -6,14 +6,11 @@ import React, { useState } from 'react';
 const SearchPage = (props) => {
     const [filter, setFilter] = useState("")
     function handleSubmit(event){
-event.preventDefault();
-let newFilter = {
-    filter: filter
-};
-props.setSearchTerm(newFilter)
+        event.preventDefault();
+        console.log(filter)
+        props.setSearchTerm(filter)
     }
      
- 
     return (
         <form onSubmit={handleSubmit}>
             <label>Search Videos</label>

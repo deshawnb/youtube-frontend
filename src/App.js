@@ -18,11 +18,12 @@ import VideoPage from "./pages/VideoPage/VideoPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
+import SearchPage from "./components/SearchBar/SearchBar";
 import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
-import SearchPage from "./components/SearchBar/SearchBar";
+
 
 
 
@@ -33,14 +34,20 @@ function App() {
 
 const [user, token] = useAuth();
 const [videos, setVideos] = useState([]);
-const [searchTerm, setSearchTerm] = useState("castles");
+let searchTerm = 'skyrim'
 
   useEffect(() => {
-    fetchVideos();
+    fetchVideos(searchTerm);
   }, []);
 
-  async function fetchVideos(){
+  function newSearch(filter){
+    searchTerm = filter;
+    fetchVideos(searchTerm)
+  }
+
+  async function fetchVideos(searchTerm){
     try {
+      console.log(searchTerm)
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
       setVideos(response.data.items);
       console.log(videos)
@@ -56,8 +63,8 @@ const [searchTerm, setSearchTerm] = useState("castles");
 
   return (
     <div>
-      <Navbar />
-      
+      <Navbar/>
+      <SearchPage setSearchTerm={newSearch}/>
       <Routes>
         <Route
           path="/"
@@ -67,7 +74,6 @@ const [searchTerm, setSearchTerm] = useState("castles");
             </PrivateRoute>
           }
         />
-        <SearchPage setSearchTerm={setSearchTerm} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/homepage" element={<HomePage />} />
