@@ -14,7 +14,7 @@ import { Outlet, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import VideoPage from "./pages/VideoPage/VideoPage";
+import Videopage from "./pages/VideoPage/Videopage";
 
 
 // Component Imports
@@ -24,8 +24,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
-import SearchPage from "./components/SearchBar/SearchBar";
-import VideoPage from "./pages/VideoPage/VideoPage";
+
 
 
 
@@ -35,11 +34,12 @@ import VideoPage from "./pages/VideoPage/VideoPage";
 
 function App() {
 
-const [user, token] = useAuth();
-const [videos, setVideos] = useState([]);
-const [videoId, setVideoId] = useState("5qap5aO4i9A")
-const [singleVideo, setSingleVideo] = useState({})
-let searchTerm = 'skyrim'
+  const [user, token] = useAuth();
+  const [videos, setVideos] = useState([]);
+  const [videoId, setVideoId] = useState("5qap5aO4i9A")
+  const [singleVideo, setSingleVideo] = useState({})
+  let searchTerm = "skyrim"
+
 
   useEffect(() => {
     fetchVideos(searchTerm);
@@ -75,16 +75,15 @@ let searchTerm = 'skyrim'
           path="/"
           element={
             <PrivateRoute>
-              <HomePage videoId={videoId} videos ={videos} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
+              <HomePage videoId={videoId} videos ={videos}  setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
             </PrivateRoute>
           }
         />
         
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="videopage" element={<VideoPage searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}/>
+        <Route path="videopage" element={<Videopage videos={videos} searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}/>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<HomePage />} >
-          <Route path="videopage" element={<VideoPage />} />
         </Route>
        
       </Routes>
