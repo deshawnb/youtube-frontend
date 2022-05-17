@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import useAuth from "../src/hooks/useAuth";
 import { KEY } from "./localKey";
+import { Outlet, Link } from "react-router-dom";
 
 
 
@@ -13,7 +14,7 @@ import { KEY } from "./localKey";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import VideoPage from "./pages/VideoPage/VideoPage";
+import Videopage from "./pages/VideoPage/Videopage";
 
 
 // Component Imports
@@ -27,12 +28,27 @@ import CommentList from "./components/CommentList/CommentList"
 import PrivateRoute from "./utils/PrivateRoute";
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> e006bc6d11716fd5746c146432f30896856b4394
 function App() {
 
   const [user, token] = useAuth();
   const [videos, setVideos] = useState([]);
+<<<<<<< HEAD
   const [comments, setComments] = useState([])
   let searchTerm = 'skyrim'
+=======
+  const [videoId, setVideoId] = useState("5qap5aO4i9A")
+  const [singleVideo, setSingleVideo] = useState({})
+  let searchTerm = "skyrim"
+>>>>>>> e006bc6d11716fd5746c146432f30896856b4394
 
 
   useEffect(() => {
@@ -77,14 +93,17 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage videos ={videos}  />
+              <HomePage videoId={videoId} videos ={videos}  setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
             </PrivateRoute>
           }
         />
+        
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="videopage" element={<Videopage videos={videos} searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}/>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/homepage" element={<HomePage />} />
-          <Route path="/videopage" element={<VideoPage />} />
+        <Route path="/" element={<HomePage />} >
+        </Route>
+       
       </Routes>
       <Footer />
     </div>
