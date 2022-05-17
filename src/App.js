@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import useAuth from "../src/hooks/useAuth";
 import { KEY } from "./localKey";
+import { Outlet, Link } from "react-router-dom";
 
 
 
@@ -22,6 +23,8 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import SearchPage from "./components/SearchBar/SearchBar";
+import VideoPage from "./pages/VideoPage/VideoPage";
+
 
 
 
@@ -33,6 +36,8 @@ function App() {
 const [user, token] = useAuth();
 const [videos, setVideos] = useState([]);
 const [searchTerm, setSearchTerm] = useState("castles");
+const [videoId, setVideoId] = useState("5qap5aO4i9A")
+const [singleVideo, setSingleVideo] = useState({})
 
   useEffect(() => {
     fetchVideos();
@@ -62,14 +67,18 @@ const [searchTerm, setSearchTerm] = useState("castles");
           path="/"
           element={
             <PrivateRoute>
-              <HomePage videos ={videos}  />
+              <HomePage videoId={videoId} videos ={videos} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
             </PrivateRoute>
           }
         />
-        <SearchPage setSearchTerm={setSearchTerm} />
+        
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="videopage" element={<VideoPage searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}/>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} >
+          <Route path="videopage" element={<VideoPage />} />
+        </Route>
+       
       </Routes>
       <Footer />
     </div>
