@@ -5,7 +5,6 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import useAuth from "../src/hooks/useAuth";
 import { KEY } from "./localKey";
-import { Outlet, Link } from "react-router-dom";
 
 
 
@@ -21,7 +20,6 @@ import Videopage from "./pages/VideoPage/Videopage";
 import Navbar from "./components/NavBar/NavBar";
 import SearchPage from "./components/SearchBar/SearchBar";
 import Footer from "./components/Footer/Footer";
-import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
