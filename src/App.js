@@ -23,41 +23,31 @@ import SearchPage from "./components/SearchBar/SearchBar";
 import Footer from "./components/Footer/Footer";
 import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList"
+import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> e006bc6d11716fd5746c146432f30896856b4394
 function App() {
 
   const [user, token] = useAuth();
   const [videos, setVideos] = useState([]);
-<<<<<<< HEAD
   const [comments, setComments] = useState([])
-  let searchTerm = 'skyrim'
-=======
-  const [videoId, setVideoId] = useState("5qap5aO4i9A")
   const [singleVideo, setSingleVideo] = useState({})
+  const [relatedVideos, setRelatedVideos] = useState([])
   let searchTerm = "skyrim"
->>>>>>> e006bc6d11716fd5746c146432f30896856b4394
+
 
 
   useEffect(() => {
     fetchVideos(searchTerm);
+    fetchRelatedVideos();
     getAllComments();
   }, []);
 
   async function getAllComments(){
-    let response = await axios.get('http://127.0.0.1:8000/api/comment/all');
+    let response = await axios.get('http://127.0.0.1:8000/api/comment/all/');
     setComments(response.data);
   }
 
@@ -66,12 +56,27 @@ function App() {
     fetchVideos(searchTerm)
   }
 
+  function showRelatedVideos(){
+
+  }
+
   async function fetchVideos(searchTerm){
     try {
       console.log(searchTerm)
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
       setVideos(response.data.items);
       console.log(videos)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  async function fetchRelatedVideos(singleVideo){
+    try {
+      console.log(singleVideo)
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${singleVideo.id.videoId}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
+      setRelatedVideos(response.data.items);
+      console.log(relatedVideos)
     } catch (error) {
       console.log(error.message);
     }
@@ -86,24 +91,22 @@ function App() {
     <div>
       <Navbar/>
       <SearchPage setSearchTerm={newSearch}/>
+      <RelatedVideos  videos ={relatedVideos} singleVideo={relatedVideos} setSingleVideo={setSingleVideo} />
       <CommentList parentComments={comments}/>
       {/* <CommentForm addNewCommentProperty={addNewComment}/> */}
       <Routes>
         <Route
-          path="/"
+          path="/home"
           element={
             <PrivateRoute>
-              <HomePage videoId={videoId} videos ={videos}  setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
+              <HomePage  videos ={videos}  singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
             </PrivateRoute>
           }
         />
         
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="videopage" element={<Videopage videos={videos} searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}/>
+        <Route path="videopage" element={<Videopage videos={videos} singleVideo={singleVideo}/>}/>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<HomePage />} >
-        </Route>
-       
       </Routes>
       <Footer />
     </div>

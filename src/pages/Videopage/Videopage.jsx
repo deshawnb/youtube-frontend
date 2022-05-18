@@ -1,4 +1,4 @@
-
+import HomePage from "../HomePage/HomePage";
 const VideoPage = (props) => {
 
 {console.log(props.singleVideo)}
@@ -10,6 +10,7 @@ const VideoPage = (props) => {
   src={(`https://www.youtube.com/embed/${props.singleVideo.id.videoId}?autoplay=0&origin=http://example.com`)}
   frameborder="0"></iframe>
         <p>{props.singleVideo.snippet.description}</p>
+        <HomePage/>
       </div>
     )
     }
