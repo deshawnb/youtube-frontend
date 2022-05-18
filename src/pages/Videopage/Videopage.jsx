@@ -12,23 +12,22 @@ const VideoPage = (props) => {
   const [comments, setComments] = useState([])
   
 
-async function fetchRelatedVideos(singleVideo){
-  try {
-    console.log(singleVideo)
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.singleVideo.id.videoId}&key=${props.KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
-    props.setRelatedVideos(response.data.items);
-    console.log(props.relatedVideos)
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-
-
 useEffect(() => {
-    fetchRelatedVideos(props.singleVideo);
+    // fetchRelatedVideos(props.singleVideo);
     fetchComments();
   }, []);
+
+
+  // async function fetchRelatedVideos(singleVideo){
+  //   try {
+  //     console.log(singleVideo)
+  //     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.singleVideo.id.videoId}&key=${props.KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
+  //     props.setRelatedVideos(response.data.items);
+  //     console.log(props.relatedVideos)
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
 
   const fetchComments = async () => {
     try {
@@ -71,10 +70,9 @@ useEffect(() => {
           <CommentForm addNewCommentProperty={createComment} video_id={props.singleVideo.id.videoId}/>
           <h2>Comments</h2>
           <CommentList parentComments={comments}/>
+          {/* <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/> */}
         </div>
-        <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/>
       </div>
-      
     )
     }
 

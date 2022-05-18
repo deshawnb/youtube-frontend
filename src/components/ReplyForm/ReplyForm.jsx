@@ -1,15 +1,20 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 
 const ReplyForm = (props) => {
     const [text, setText] = useState('');
+    let comment = props.comment
+    let user = props.user
 
     function handleSubmit(event) {
         event.preventDefault();
         let newReply = {
-            text : text
+            user : user,
+            comment : comment,
+            text : text,
+
         };
         console.log(newReply);
-        props.addNewCommentProperty(newReply)
+        props.addNewReplyProperty(newReply)
     }
 
     return (
