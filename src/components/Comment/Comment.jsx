@@ -3,11 +3,15 @@
 const Comment = (props) => {
     return (
         <div >
-            <p>{props.id}</p>
-            <p>{props.video_id}</p>
+            <p>{props.user.username}</p>
             <p>{props.text}</p>
-            <p>{props.likes}</p>
-            <p>{props.dislikes}</p>
+            <tr>
+                <button>Like</button>
+                <td>{props.likes}</td>
+                <button>Dislike</button>
+                <td>{props.dislikes}</td>
+            </tr>
+            
         </div>
     );
 }

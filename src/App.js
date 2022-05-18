@@ -21,8 +21,6 @@ import Videopage from "./pages/VideoPage/Videopage";
 import Navbar from "./components/NavBar/NavBar";
 import SearchPage from "./components/SearchBar/SearchBar";
 import Footer from "./components/Footer/Footer";
-import CommentForm from "./components/CommentForm/CommentForm";
-import CommentList from "./components/CommentList/CommentList"
 import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 
 // Util Imports
@@ -33,7 +31,6 @@ function App() {
 
   const [user, token] = useAuth();
   const [videos, setVideos] = useState([]);
-  const [comments, setComments] = useState([])
   const [singleVideo, setSingleVideo] = useState({})
   const [relatedVideos, setRelatedVideos] = useState([])
   let searchTerm = "skyrim"
@@ -42,14 +39,7 @@ function App() {
 
   useEffect(() => {
     fetchVideos(searchTerm);
-    fetchRelatedVideos();
-    getAllComments();
   }, []);
-
-  async function getAllComments(){
-    let response = await axios.get('http://127.0.0.1:8000/api/comment/all/');
-    setComments(response.data);
-  }
 
   function newSearch(filter){
     searchTerm = filter;
@@ -66,15 +56,6 @@ function App() {
       console.log(error.message);
     }
   };
-  async function fetchRelatedVideos(singleVideo){
-    try {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${singleVideo.id.videoId}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
-      setRelatedVideos(response.data.items);
-      console.log(relatedVideos)
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
 
 
@@ -85,9 +66,6 @@ function App() {
     <div>
       <Navbar/>
        <SearchPage setSearchTerm={newSearch}/>
-     
-      {/* <CommentList parentComments={comments}/>  */}
-      {/* <CommentForm addNewCommentProperty={addNewComment}/> */}
       <Routes>
         <Route
           path="/"
@@ -101,7 +79,7 @@ function App() {
         
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="videopage" element={<Videopage KEY={KEY} fetchRelatedVideos={fetchRelatedVideos} videos={videos} searchTerm={searchTerm} singleVideo={singleVideo} relatedVideos={relatedVideos} setSingleVideo={setSingleVideo} setRelatedVideos={setRelatedVideos}/>}/>
+        <Route path="videopage" element={<Videopage KEY={KEY} videos={videos} searchTerm={searchTerm} singleVideo={singleVideo} relatedVideos={relatedVideos} setSingleVideo={setSingleVideo} setRelatedVideos={setRelatedVideos}/>}/>
          
         
       

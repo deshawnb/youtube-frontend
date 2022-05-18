@@ -26,13 +26,8 @@ function handleClick2(index){
              <div>
                 <h1> {props.relatedVideos[0].snippet.title}</h1>
                  
-                  <Link to="/videopage" onClick={() => handleClick2(0)} ><img src={props.relatedVideos[0].snippet.thumbnails.default.url} alt='video link'/></Link>
-                  </div>     
-
-
-
-
-
+                   <Link to="/videopage" onClick={() => handleClick2(0)} ><img src={props.relatedVideos[0].snippet.thumbnails.default.url} alt='video link'/></Link>
+                  </div>      
 
               <div>
                 <h1> {props.relatedVideos[1].snippet.title}</h1>

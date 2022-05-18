@@ -6,7 +6,7 @@ const CommentList = (props) => {
             {props.parentComments.map((comment) => {
                 return (
                     <div>
-                        <Comment id={comment.id} video_id={comment.video_id} text={comment.text} likes={comment.likes} dislikes={comment.dislikes}/>
+                        <Comment id={comment.id} user={comment.user} video_id={comment.video_id} text={comment.text} likes={comment.likes} dislikes={comment.dislikes}/>
                     </div>
                 );
             })}
