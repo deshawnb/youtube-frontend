@@ -72,7 +72,7 @@ useEffect(() => {
           <h2>Comments</h2>
           <CommentList parentComments={comments}/>
         </div>
-        <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/>
+        {props.relatedVideos && <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/> }
       </div>
       
     )
