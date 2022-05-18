@@ -33,26 +33,31 @@ function App() {
 
   const [user, token] = useAuth();
   const [videos, setVideos] = useState([]);
-  const [videoId, setVideoId] = useState("5qap5aO4i9A")
-  const [singleVideo, setSingleVideo] = useState({})
   const [comments, setComments] = useState([])
-  const [relatedVideos, setRelatedVideos] =useState([])
+  const [singleVideo, setSingleVideo] = useState({})
+  const [relatedVideos, setRelatedVideos] = useState([])
   let searchTerm = "skyrim"
+
 
 
   useEffect(() => {
     fetchVideos(searchTerm);
+    fetchRelatedVideos();
     getAllComments();
   }, []);
 
   async function getAllComments(){
-    let response = await axios.get('http://127.0.0.1:8000/api/comment/all');
+    let response = await axios.get('http://127.0.0.1:8000/api/comment/all/');
     setComments(response.data);
   }
 
   function newSearch(filter){
     searchTerm = filter;
     fetchVideos(searchTerm)
+  }
+
+  function showRelatedVideos(){
+
   }
 
   async function fetchVideos(searchTerm){
@@ -75,6 +80,17 @@ function App() {
     }
   };
 
+  async function fetchRelatedVideos(singleVideo){
+    try {
+      console.log(singleVideo)
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${singleVideo.id.videoId}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
+      setRelatedVideos(response.data.items);
+      console.log(relatedVideos)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
 
 
@@ -84,14 +100,15 @@ function App() {
     <div>
       <Navbar/>
       <SearchPage setSearchTerm={newSearch}/>
-      {/* <CommentList parentComments={comments}/> */}
+      <RelatedVideos  videos ={relatedVideos} singleVideo={relatedVideos} setSingleVideo={setSingleVideo} />
+      <CommentList parentComments={comments}/>
       {/* <CommentForm addNewCommentProperty={addNewComment}/> */}
       <Routes>
         <Route
-          path="/"
+          path="/home"
           element={
             <PrivateRoute>
-              <HomePage videoId={videoId} videos ={videos}  setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
+              <HomePage  videos ={videos}  singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
             </PrivateRoute>
 
           }

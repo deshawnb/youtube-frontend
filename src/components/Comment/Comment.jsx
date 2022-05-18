@@ -2,9 +2,12 @@
 
 const Comment = (props) => {
     return (
-        <div className="">
+        <div >
+            <p>{props.id}</p>
+            <p>{props.video_id}</p>
             <p>{props.text}</p>
-            <p></p>
+            <p>{props.likes}</p>
+            <p>{props.dislikes}</p>
         </div>
     );
 }
