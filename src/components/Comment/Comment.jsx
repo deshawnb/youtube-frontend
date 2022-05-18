@@ -41,6 +41,52 @@ const Comment = (props) => {
         }
       };
 
+      const likeComment = async () => {
+        try {
+          let response = await axios.put(`http://127.0.0.1:8000/api/comment/${props.id}/update/`, {
+            video_id : props.video_id,
+            text : props.text,
+            likes : props.likes + 1,
+            dislikes : props.dislikes,
+            published: true,
+
+          }, {
+            headers: {
+              Authorization: "Bearer " + token,
+            }, 
+          } );
+          if(response.status === 201){
+            await fetchReplies();
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+        
+      };
+
+
+      const dislikeComment = async () => {
+        try {
+          let response = await axios.put(`http://127.0.0.1:8000/api/comment/${props.id}/update/`, {
+            video_id : props.video_id,
+            text : props.text,
+            likes : props.likes,
+            dislikes : props.dislikes + 1,
+            published: true,
+
+          }, {
+            headers: {
+              Authorization: "Bearer " + token,
+            }, 
+          } );
+          if(response.status === 201){
+            await fetchReplies();
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+        
+      };
 
     return (
         <div >
@@ -48,9 +94,9 @@ const Comment = (props) => {
                 <p>{props.user.username}</p>
                 <p>{props.text}</p>
                 <tr>
-                    <button >Like</button>
+                    <button onClick={likeComment} >Like</button>
                     <td>{props.likes}</td>
-                    <button >Dislike</button>
+                    <button onClick={dislikeComment}>Dislike</button>
                     <td>{props.dislikes}</td>
                 </tr>
             </div>
