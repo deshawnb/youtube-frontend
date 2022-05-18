@@ -56,10 +56,6 @@ function App() {
     fetchVideos(searchTerm)
   }
 
-  function showRelatedVideos(){
-
-  }
-
   async function fetchVideos(searchTerm){
     try {
       console.log(searchTerm)
@@ -99,13 +95,13 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <SearchPage setSearchTerm={newSearch}/>
-      <RelatedVideos  videos ={relatedVideos} singleVideo={relatedVideos} setSingleVideo={setSingleVideo} />
-      <CommentList parentComments={comments}/>
+       <SearchPage setSearchTerm={newSearch}/>
+     
+      {/* <CommentList parentComments={comments}/>  */}
       {/* <CommentForm addNewCommentProperty={addNewComment}/> */}
       <Routes>
         <Route
-          path="/home"
+          path="/"
           element={
             <PrivateRoute>
               <HomePage  videos ={videos}  singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
@@ -116,12 +112,11 @@ function App() {
         
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="videopage" element={<Videopage fetchRelatedVideos={fetchRelatedVideos} videos={videos} searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}>
-          <Route path="relatedvideos" element={<RelatedVideos relatedVideos={relatedVideos} setSingleVideo={setSingleVideo}    />}>
+        <Route path="videopage" element={<Videopage fetchRelatedVideos={fetchRelatedVideos} videos={videos} searchTerm={searchTerm} singleVideo={singleVideo}/>}>
+          <Route path="relatedvideos" element={<RelatedVideos relatedVideos={relatedVideos} setSingleVideo={setSingleVideo}/>}>
         </Route> 
         </Route>
-        
-
+      
       </Routes>
       <Footer />
     </div>
