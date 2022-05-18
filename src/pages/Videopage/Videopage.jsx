@@ -1,16 +1,34 @@
+import { Link, Outlet } from "react-router-dom";
+import React, { useEffect } from 'react';
+
+
+
 
 const VideoPage = (props) => {
 
-{console.log(props.singleVideo)}
+  useEffect(() => {
+    props.fetchRelatedVideos(props.singleVideo);
+  
+    
+    
+  }, []);
+
+
+  
+
     return ( 
 
       <div>
+        
         <h1> {props.singleVideo.snippet.title}</h1>
         <iframe id="ytplayer" type="text/html" width="640" height="360"
   src={(`https://www.youtube.com/embed/${props.singleVideo.id.videoId}?autoplay=0&origin=http://example.com`)}
   frameborder="0"></iframe>
         <p>{props.singleVideo.snippet.description}</p>
+        <Link to={"/videopage/relatedvideos"}>Click here for related vids</Link>
+        <Outlet></Outlet>
       </div>
+      
     )
     }
 

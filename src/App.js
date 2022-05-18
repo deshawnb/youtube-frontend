@@ -23,32 +23,21 @@ import SearchPage from "./components/SearchBar/SearchBar";
 import Footer from "./components/Footer/Footer";
 import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList"
+import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> e006bc6d11716fd5746c146432f30896856b4394
 function App() {
 
   const [user, token] = useAuth();
   const [videos, setVideos] = useState([]);
-<<<<<<< HEAD
-  const [comments, setComments] = useState([])
-  let searchTerm = 'skyrim'
-=======
   const [videoId, setVideoId] = useState("5qap5aO4i9A")
   const [singleVideo, setSingleVideo] = useState({})
+  const [comments, setComments] = useState([])
+  const [relatedVideos, setRelatedVideos] =useState([])
   let searchTerm = "skyrim"
->>>>>>> e006bc6d11716fd5746c146432f30896856b4394
 
 
   useEffect(() => {
@@ -76,6 +65,15 @@ function App() {
       console.log(error.message);
     }
   };
+  async function fetchRelatedVideos(singleVideo){
+    try {
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${singleVideo.id.videoId}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
+      setRelatedVideos(response.data.items);
+      console.log(relatedVideos)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
 
 
@@ -86,7 +84,7 @@ function App() {
     <div>
       <Navbar/>
       <SearchPage setSearchTerm={newSearch}/>
-      <CommentList parentComments={comments}/>
+      {/* <CommentList parentComments={comments}/> */}
       {/* <CommentForm addNewCommentProperty={addNewComment}/> */}
       <Routes>
         <Route
@@ -95,15 +93,18 @@ function App() {
             <PrivateRoute>
               <HomePage videoId={videoId} videos ={videos}  setVideoId={setVideoId} singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
             </PrivateRoute>
+
           }
         />
         
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="videopage" element={<Videopage videos={videos} searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}/>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<HomePage />} >
+        <Route path="videopage" element={<Videopage fetchRelatedVideos={fetchRelatedVideos} videos={videos} searchTerm={searchTerm} videoId={videoId} setVideoId={setVideoId} singleVideo={singleVideo}/>}>
+          <Route path="relatedvideos" element={<RelatedVideos relatedVideos={relatedVideos} setSingleVideo={setSingleVideo}    />}>
+        </Route> 
         </Route>
-       
+        
+
       </Routes>
       <Footer />
     </div>

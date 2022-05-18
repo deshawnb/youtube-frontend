@@ -9,7 +9,7 @@ const SearchPage = (props) => {
         event.preventDefault();
         console.log(filter)
         props.setSearchTerm(filter)
-        Navigate("/homepage")
+        
     }
      
     return (

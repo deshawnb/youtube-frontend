@@ -11,8 +11,10 @@ const HomePage = (props) => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
 function handleClick(index){
-  props.setSingleVideo(props.videos[index]);
-  
+  let newSingleVideo = props.videos[index];
+  props.setSingleVideo(newSingleVideo);
+console.log(newSingleVideo);
+
 }
 
 
