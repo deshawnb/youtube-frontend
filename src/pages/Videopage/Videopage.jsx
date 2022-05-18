@@ -1,10 +1,26 @@
-import { Link, Outlet } from "react-router-dom";
+
+import axios from "axios";
 import React, { useEffect } from 'react';
-import HomePage from "../HomePage/HomePage";
+import RelatedVideos from "../../components/RelatedVideos/RelatedVideos";
+
 const VideoPage = (props) => {
+  
+
+async function fetchRelatedVideos(singleVideo){
+  try {
+    console.log(singleVideo)
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.singleVideo.id.videoId}&key=${props.KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
+    props.setRelatedVideos(response.data.items);
+    console.log(props.relatedVideos)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   useEffect(() => {
-    props.fetchRelatedVideos(props.singleVideo);
+    fetchRelatedVideos(props.singleVideo);
+    console.log(props.RelatedVideos)
   
     
     
@@ -22,8 +38,9 @@ const VideoPage = (props) => {
   src={(`https://www.youtube.com/embed/${props.singleVideo.id.videoId}?autoplay=0&origin=http://example.com`)}
   frameborder="0"></iframe>
         <p>{props.singleVideo.snippet.description}</p>
-        <Link to={"/videopage/relatedvideos"}>Click here for related vids</Link>
-        <Outlet></Outlet>
+        <div>
+        <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/>
+        </div>
       </div>
       
     )

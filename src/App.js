@@ -76,17 +76,6 @@ function App() {
     }
   };
 
-  async function fetchRelatedVideos(singleVideo){
-    try {
-      console.log(singleVideo)
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${singleVideo.id.videoId}&key=${KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
-      setRelatedVideos(response.data.items);
-      console.log(relatedVideos)
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
 
 
 
@@ -112,10 +101,9 @@ function App() {
         
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="videopage" element={<Videopage fetchRelatedVideos={fetchRelatedVideos} videos={videos} searchTerm={searchTerm} singleVideo={singleVideo}/>}>
-          <Route path="relatedvideos" element={<RelatedVideos relatedVideos={relatedVideos} setSingleVideo={setSingleVideo}/>}>
-        </Route> 
-        </Route>
+        <Route path="videopage" element={<Videopage KEY={KEY} fetchRelatedVideos={fetchRelatedVideos} videos={videos} searchTerm={searchTerm} singleVideo={singleVideo} relatedVideos={relatedVideos} setSingleVideo={setSingleVideo} setRelatedVideos={setRelatedVideos}/>}/>
+         
+        
       
       </Routes>
       <Footer />

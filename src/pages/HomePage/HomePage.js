@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import { Outlet, Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
