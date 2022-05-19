@@ -26,28 +26,28 @@ function handleClick2(index){
              <div>
                 <h1> {props.relatedVideos[0].snippet.title}</h1>
                  
-                   <Link to="/videopage" onClick={() => handleClick2(0)} ><img src={props.relatedVideos[0].snippet.thumbnails.default.url} alt='video link'/></Link>
+                   <Link to="/videopage" onClick={() => handleClick2(0)} ><img src={props.relatedVideos[0].snippet.thumbnails.default.url} className="center" alt='video link'/></Link>
                   </div>      
 
               <div>
                 <h1> {props.relatedVideos[1].snippet.title}</h1>
                  
-                  <Link to="/videopage" onClick={() => handleClick2(1)} ><img src={props.relatedVideos[1].snippet.thumbnails.default.url} alt='video link'/></Link>
+                  <Link to="/videopage" onClick={() => handleClick2(1)} ><img src={props.relatedVideos[1].snippet.thumbnails.default.url} className="center" alt='video link'/></Link>
                   </div>     
              <div>
                 <h1> {props.relatedVideos[2].snippet.title}</h1>
                  
-                  <Link to="/videopage" onClick={() => handleClick2(2)} ><img src={props.relatedVideos[2].snippet.thumbnails.default.url} alt='video link'/></Link>
+                  <Link to="/videopage" onClick={() => handleClick2(2)} ><img src={props.relatedVideos[2].snippet.thumbnails.default.url} className="center" alt='video link'/></Link>
                   </div>     
              <div>
                 <h1> {props.relatedVideos[3].snippet.title}</h1>
                  
-                  <Link to="/videopage" onClick={() => handleClick2(3)} ><img src={props.relatedVideos[3].snippet.thumbnails.default.url} alt='video link'/></Link>
+                  <Link to="/videopage" onClick={() => handleClick2(3)} ><img src={props.relatedVideos[3].snippet.thumbnails.default.url} className="center" alt='video link'/></Link>
                   </div>     
              <div>
                 <h1> {props.relatedVideos[4].snippet.title}</h1>
                  
-                  <Link to="/videopage" onClick={() => handleClick2(4)} ><img src={props.relatedVideos[4].snippet.thumbnails.default.url} alt='video link'/></Link>
+                  <Link to="/videopage" onClick={() => handleClick2(4)} ><img src={props.relatedVideos[4].snippet.thumbnails.default.url} className="center" alt='video link'/></Link>
                   </div>      
                 
                

@@ -19,6 +19,7 @@ useEffect(() => {
 
 
   
+
   const fetchComments = async () => {
     try {
       let response = await axios.get(`http://127.0.0.1:8000/api/comment/${props.singleVideo.id.videoId}/`, {
@@ -62,7 +63,7 @@ useEffect(() => {
           <CommentList parentComments={comments}/>
           
         </div>
-        {props.relatedVideos && <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/> }
+        {props.relatedVideos && <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/> } 
       </div>
     )
     }

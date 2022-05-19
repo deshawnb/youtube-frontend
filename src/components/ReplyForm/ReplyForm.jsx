@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ReplyForm.css"
 
 const ReplyForm = (props) => {
     const [text, setText] = useState('');
@@ -19,9 +20,9 @@ const ReplyForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Text</label>
+            <label>Reply</label>
             <input type='text' value={text} onChange={(event) =>setText(event.target.value)}/>
-            <button type="submit">Add</button>
+            <button type="submit" className="add">Add</button>
         </form>
     );
 }

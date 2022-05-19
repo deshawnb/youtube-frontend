@@ -70,6 +70,7 @@ function App() {
           element={
             <PrivateRoute>
               <HomePage  videos ={videos}  singleVideo={singleVideo} setSingleVideo={setSingleVideo} />
+            
             </PrivateRoute>
 
           }

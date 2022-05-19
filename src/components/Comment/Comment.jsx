@@ -3,6 +3,7 @@ import ReplyList from "../ReplyList/ReplyList";
 import ReplyForm from "../ReplyForm/ReplyForm";
 import React, { useEffect, useState } from 'react';
 import useAuth from "../../hooks/useAuth";
+import "./Comment.css"
 
 
 const Comment = (props) => {
@@ -89,22 +90,26 @@ const Comment = (props) => {
       };
 
     return (
-        <div >
+        <div className="comment">
             <div>
                 <p>{props.user.username}</p>
                 <p>{props.text}</p>
-                <tr>
+                <div className="button">
                     <button onClick={likeComment} >Like</button>
-                    <td>{props.likes}</td>
+                    <p className="counter">{props.likes}</p>
+                </div>
+                <div className="button">
                     <button onClick={dislikeComment}>Dislike</button>
-                    <td>{props.dislikes}</td>
-                </tr>
+                    <p className="counter">{props.dislikes}</p>
+                </div>
             </div>
             
             <div>
                 <ReplyForm addNewReplyProperty={createReply} comment={props.id} user={props.user.id}/>
                 <h2>Replies</h2>
-                <ReplyList parentReplies={replies}/>
+                <div className="reply">
+                  <ReplyList parentReplies={replies}/>
+                </div>
             </div>
             
         </div>
