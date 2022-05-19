@@ -18,16 +18,6 @@ useEffect(() => {
   }, []);
 
 
-  // async function fetchRelatedVideos(singleVideo){
-  //   try {
-  //     console.log(singleVideo)
-  //     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.singleVideo.id.videoId}&key=${props.KEY}&type=video&relatedToVideo&part=snippet&maxResults=5`);
-  //     props.setRelatedVideos(response.data.items);
-  //     console.log(props.relatedVideos)
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
 
   const fetchComments = async () => {
     try {
@@ -72,7 +62,7 @@ useEffect(() => {
           <CommentList parentComments={comments}/>
           
         </div>
-        {props.relatedVideos && <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/> }
+        {/* {props.relatedVideos && <RelatedVideos relatedVideos={props.relatedVideos} setSingleVideo={props.setSingleVideo}/> } */}
       </div>
     )
     }

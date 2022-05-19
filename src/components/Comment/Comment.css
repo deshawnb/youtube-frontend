@@ -1,0 +1,26 @@
+.comment {
+    background-color: steelblue;
+    border-color: black;
+    margin: 10px;
+    color: white;
+    border-bottom: groove;
+    padding: 20px;
+    
+}
+.reply {
+    background-color: white;
+    color: black;
+    margin: 10px;
+    padding: 20px;
+}
+.button {
+    background-color: white;
+    color: black;
+    display: block;
+    float: right;
+    margin: 10px;
+}
+.counter {
+    color: white;
+    background-color: steelblue;
+}
