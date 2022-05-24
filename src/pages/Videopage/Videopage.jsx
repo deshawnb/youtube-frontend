@@ -22,7 +22,7 @@ useEffect(() => {
 
   const fetchComments = async () => {
     try {
-      let response = await axios.get(`http://127.0.0.1:8000/api/comment/${props.singleVideo.id.videoId}/`, {
+      let response = await axios.get(`${REACT_APP_URL}/api/comment/${props.singleVideo.id.videoId}/`, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -35,7 +35,7 @@ useEffect(() => {
 
   const createComment = async (newComment) => {
     try {
-      let response = await axios.post('http://127.0.0.1:8000/api/comment/', newComment, {
+      let response = await axios.post(`${REACT_APP_URL}/api/comment/`, newComment, {
         headers: {
           Authorization: "Bearer " + token,
         }, 
