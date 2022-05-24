@@ -1,0 +1,8 @@
+ersion: '3.9'
+
+services:
+  youtubefrontend:
+    container_name: youtubefrontend
+    image: brownd726/youtubefrontend:latest
+    ports:
+      - "80:80"
