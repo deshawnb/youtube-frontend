@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  youtubefrontend:
+    container_name: youtubefrontend
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8003:3000"
