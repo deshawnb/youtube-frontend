@@ -19,7 +19,7 @@ function setUserObject(user) {
 }
 
 export const AuthProvider = ({ children }) => {
-  const BASE_URL = `${REACT_APP_URL}/api/auth`;
+  const BASE_URL = `${process.env.REACT_APP_URL}/api/auth`;
   const userToken = JSON.parse(localStorage.getItem("token"));
   const decodedUser = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);

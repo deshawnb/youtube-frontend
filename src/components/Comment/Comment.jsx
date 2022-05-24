@@ -16,7 +16,7 @@ const Comment = (props) => {
 
       const fetchReplies = async () => {
         try {
-          let response = await axios.get(`${REACT_APP_URL}/api/comment/replies/${props.id}`, {
+          let response = await axios.get(`${process.env.REACT_APP_URL}/api/comment/replies/${props.id}`, {
             headers: {
               Authorization: "Bearer " + token,
             },
@@ -29,7 +29,7 @@ const Comment = (props) => {
     
       const createReply = async (newReply) => {
         try {
-          let response = await axios.post(`${REACT_APP_URL}/api/comment/replies/${props.id}`, newReply, {
+          let response = await axios.post(`${process.env.REACT_APP_URL}/api/comment/replies/${props.id}`, newReply, {
             headers: {
               Authorization: "Bearer " + token,
             }, 
@@ -44,7 +44,7 @@ const Comment = (props) => {
 
       const likeComment = async () => {
         try {
-          let response = await axios.put(`${REACT_APP_URL}/api/comment/${props.id}/update/`, {
+          let response = await axios.put(`${process.env.REACT_APP_URL}/api/comment/${props.id}/update/`, {
             video_id : props.video_id,
             text : props.text,
             likes : props.likes + 1,
@@ -68,7 +68,7 @@ const Comment = (props) => {
 
       const dislikeComment = async () => {
         try {
-          let response = await axios.put(`${REACT_APP_URL}/api/comment/${props.id}/update/`, {
+          let response = await axios.put(`${process.env.REACT_APP_URL}/api/comment/${props.id}/update/`, {
             video_id : props.video_id,
             text : props.text,
             likes : props.likes,
